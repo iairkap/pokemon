@@ -57,7 +57,7 @@ const getPokemons = async (req, res, next) => {
           sprites.other["official-artwork"].front_default,
         name,
         Types: types.map((type) => type.type.name),
-        attack: stats[1].base_stat,
+        attack: stats[1].base_stat, //aca con stats me traigo el array de stats y con el indice accedo a la propiedad base_stat
         defense: stats[2].base_stat,
         speed: stats[5].base_stat,
         height,

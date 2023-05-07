@@ -6,7 +6,7 @@ const getTypes = async (req, res, next) => {
   try {
     const typesDB = await Type.findAll();
     if (typesDB.length === 0) {
-      const data = await axios.get(`${API_BASE_URL}/type`);
+      const data = await axios.get(`https://pokeapi.co/api/v2/type`);
       const types = data.data.results.map((type) => {
         return {
           name: type.name,
