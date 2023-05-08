@@ -1,9 +1,26 @@
-import './App.css';
+import { useLocation, Route } from "react-router-dom";
+import Home from "./views/Home Page/Home";
+import Landing from "./views/Landing Page/Landing";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      <h1>Henry Pokemon</h1>
+      <Route
+        exact
+        path="/"
+        render={() => {
+          return <Landing />;
+        }}
+      />
+      <Route
+        exact
+        path="/home"
+        render={() => {
+          return <Home />;
+        }}
+      />
     </div>
   );
 }
