@@ -44,27 +44,86 @@ const rootReducer = (state = initialState, action) => {
         types: action.payload,
       };
     case FILTER_POKEMONS_BY_TYPE:
-      const temporal = state.pokemons.filter((pokemon) => {
-        return pokemon.Types?.includes(action.payload); //el includes es para que me traiga los pokemones que tengan ese tipo, es un metodo de los arrays.
+      const filteredPokemons = state.pokemons.filter((pokemon) => {
+        // Con esta constante filteredPokemons guardo el resultado de filtrar los pokemons por tipo y luego lo paso al state
+        return pokemon.types?.includes(action.payload);
       });
+
       if (action.payload !== "Types") {
-        if (action.payload === "All types") {
+        if (action.payload === "All Types") {
           return {
             ...state,
-            filterAndOrderPokemons: [state.pokemons],
+            filterAndOrderPokemons: [...state.pokemons],
+            filter: [...state.pokemons],
             currentPage: 0,
           };
         } else {
           return {
             ...state,
-            filterAndOrderPokemons: temporal,
-            filter: temporal,
+            filterAndOrderPokemons: filteredPokemons,
+            filter: filteredPokemons,
             currentPage: 0,
           };
         }
       }
       break;
     case FILTER_POKEMONS_BY_ORIGIN:
+      if (action.payload !== "Origin") {
+        if (action.payload === "All Origins") {
+          return {
+            ...state,
+            filterAndOrderPokemons: [...state.pokemons],
+            currentPage: 0,
+          };
+        }
+        if (action.payload === "API") {
+          return {
+            ...state,
+            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
+              return pokemon.id < 1200; // Cambiado de pokemon.id.length < 1200
+            }),
+            currentPage: 0,
+          };
+        } else {
+          return {
+            ...state,
+            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
+              return pokemon.id >= 1200; // Cambiado de pokemon.id.length >= 1200
+            }),
+            currentPage: 0,
+          };
+        }
+      }
+      break;
+    /* case FILTER_POKEMONS_BY_ORIGIN:
+      if (action.payload !== "Origin") {
+        if (action.payload === "All Origins") {
+          return {
+            ...state,
+            filterAndOrderPokemons: [state.pokemons],
+            currentPage: 0,
+          };
+        }
+        if (action.payload === "API") {
+          return {
+            ...state,
+            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
+              return pokemon.id < 1200; // Cambiado de pokemon.id.length < 1200
+            }),
+            currentPage: 0,
+          };
+        } else {
+          return {
+            ...state,
+            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
+              return pokemon.id >= 1200; // Cambiado de pokemon.id.length >= 1200
+            }),
+            currentPage: 0,
+          };
+        }
+      }
+      break; */
+    /*  case FILTER_POKEMONS_BY_ORIGIN:
       if (action.payload !== "Origin") {
         if (action.payload === "All Origins") {
           return {
@@ -91,7 +150,7 @@ const rootReducer = (state = initialState, action) => {
           };
         }
       }
-      break;
+      break; */
     case ORDER_ASCENDENT_DESCENDENT:
       if (action.payload === "Ascendent") {
         return {
@@ -127,7 +186,8 @@ const rootReducer = (state = initialState, action) => {
           ],
           currentPage: 0,
         };
-      } else {
+      }
+      if (action.payload === "Z-A") {
         return {
           ...state,
           filterAndOrderPokemons: [
@@ -144,6 +204,7 @@ const rootReducer = (state = initialState, action) => {
           currentPage: 0,
         };
       }
+      break;
     case ORDER_BY_ATTACK:
       if (action.payload === "Worse attack") {
         return {
@@ -152,7 +213,8 @@ const rootReducer = (state = initialState, action) => {
             ...state.filterAndOrderPokemons.sort((a, b) => a.attack - b.attack),
           ],
         };
-      } else {
+      }
+      if (action.payload === "Best attack") {
         return {
           ...state,
           filterAndOrderPokemons: [
@@ -160,7 +222,7 @@ const rootReducer = (state = initialState, action) => {
           ],
         };
       }
-
+      break;
     case GET_POKEMON_BY_NAME:
       return {
         ...state,

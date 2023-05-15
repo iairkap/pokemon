@@ -6,8 +6,8 @@ import { getPokemons, getType } from "../../redux/actions/actions";
 
 function Landing() {
   const dispatch = useDispatch();
-  const types = useSelector((state) => state.types);
   const pokemons = useSelector((state) => state.pokemons);
+  const types = useSelector((state) => state.types);
 
   useEffect(() => {
     if (types.length === 0 && pokemons.length === 0) {

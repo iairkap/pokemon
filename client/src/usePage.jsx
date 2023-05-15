@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 
 export const usePage = (iterableArray, numberElementsPerPage, currentPage) => {
+  console.log("iterableArray:", iterableArray);
+  console.log("currentPage:", currentPage);
   const countPage = useMemo(() => {
     if (numberElementsPerPage <= 0 || iterableArray.length === 0) {
       return [];
@@ -16,5 +18,7 @@ export const usePage = (iterableArray, numberElementsPerPage, currentPage) => {
   const End = Start + numberElementsPerPage;
   const page = iterableArray.slice(Start, End);
 
+  console.log("page:", page);
+  console.log("countPage:", countPage);
   return { page, countPage };
 };

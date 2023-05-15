@@ -13,10 +13,10 @@ function Card({ id, image, name, types }) {
         <img className={styles.imagen} src={image} alt={name} />
       </Link>
       <div className={styles.card_info}>
-        <h3 className="Name">{name}</h3>
-        <div className="Types">
+        <h3 className={styles.Name}>{name}</h3>
+        <div className={styles.Types}>
           {types?.length > 0 &&
-            types.map((type, index) => <p key={index}>{type}</p>)}
+            types.map((type, index) => <span key={index}>{type}</span>)}
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const SET_POKEMONS = "SET_POKEMONS";
 export const SET_POKEMONS_DETAIL = "SET_POKEMONS_DETAIL";
 
+export const URL = "http://localhost:3001/pokemon";
 //! Funciones async
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -74,17 +75,26 @@ export const getPokemonByName = (name) => {
 
 export const createPokemon = (body) => {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/pokemon", body);
-    const pokemon = response.data;
-    dispatch({ type: CREATE_POKEMON, payload: pokemon });
+    try {
+      const response = await axios.post("http://localhost:3001/pokemon", body);
+      const pokemon = response.data;
+      if (response.status === 200) {
+        dispatch({ type: CREATE_POKEMON, payload: pokemon });
+      } else {
+        alert("No se puede crear el Pokémon.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("No se puede crear el Pokémon.");
+    }
   };
 };
 
 export const getType = () => {
   return async function (dispatch) {
     try {
-      const response = await fetch("http://localhost:3001/types");
-      const types = await response.json();
+      const response = await axios.get("http://localhost:3001/pokemon/types");
+      const types = response.data;
       dispatch({ type: GET_TYPE, payload: types });
     } catch (error) {
       console.error(error);
