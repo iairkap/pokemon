@@ -69,11 +69,88 @@
 
 .Types {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Espaciado entre elementos */
 }
 
 .Types span {
   font-size: 1em;
   padding: 2px 5px;
+}
+
+.Types svg {
+  /* Asegúrate de que el ícono esté a la misma altura que el texto */
+  vertical-align: middle;
+}
+
+.bug {
+  background-color: rgb(157 193 48);
+}
+
+.dark {
+  background-color: rgb(95 96 109);
+}
+
+.dragon {
+  background-color: rgb(7 115 199);
+}
+
+.electric {
+  background-color: rgb(244 206 70);
+}
+
+.fairy {
+  background-color: rgb(239 151 230);
+}
+
+.fight {
+  background-color: rgb(217 66 86);
+}
+
+.fire {
+  background-color: rgb(248 165 79);
+}
+
+.flying {
+  background-color: rgb(155 180 232);
+}
+
+.ghost {
+  background-color: rgb(105 112 197);
+}
+
+.grass {
+  background-color: rgb(93 190 98);
+}
+
+.ground {
+  background-color: rgb(215 133 85);
+}
+
+.ice {
+  background-color: rgb(126 212 201);
+}
+
+.normal {
+  background-color: rgb(154 157 161);
+}
+
+.poison {
+  background-color: rgb(181 99 206);
+}
+
+.psychic {
+  background-color: rgb(181 99 206);
+}
+
+.rock {
+  background-color: rgb(206 193 140);
+}
+
+.steel {
+  background-color: rgb(85 150 164);
+}
+
+.water {
+  background-color: rgb(85 158 223);
 }
