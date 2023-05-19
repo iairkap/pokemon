@@ -13,6 +13,7 @@ export const ORDER_A_TO_Z_Z_TO_A = "ORDER_A_TO_Z_Z_TO_A";
 export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const SET_POKEMONS = "SET_POKEMONS";
 export const SET_POKEMONS_DETAIL = "SET_POKEMONS_DETAIL";
+export const CLEAR_POKEMONS = "CLEAR_POKEMONS";
 
 export const URL = "http://localhost:3001/pokemon";
 //! Funciones async
@@ -77,6 +78,7 @@ export const createPokemon = (body) => {
   return async function (dispatch) {
     try {
       const response = await axios.post("http://localhost:3001/pokemon", body);
+      console.log(body);
       const pokemon = response.data;
       if (response.status === 200) {
         dispatch({ type: CREATE_POKEMON, payload: pokemon });
@@ -134,4 +136,8 @@ export const setPokemons = (pokemons) => {
 
 export const setPokemonsDetail = (pokemons) => {
   return { type: SET_POKEMONS_DETAIL, payload: pokemons };
+};
+
+export const clearPokemons = () => {
+  return { type: CLEAR_POKEMONS };
 };

@@ -27,6 +27,16 @@
 }
  */
 
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ededed;
+  margin: 50px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -35,10 +45,9 @@
   width: 200px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  margin: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  background: #f3f3f3;
+  margin: 2em;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.454);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -50,6 +59,7 @@
   width: 150px;
   height: 150px;
   object-fit: cover;
+  margin-top: -5rem; /* Aquí agregamos el margen negativo. Ajusta este valor para que se ajuste a tus necesidades */
 }
 
 .card_info {
@@ -58,9 +68,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10px 0;
+  padding: 5px 0;
 }
-
 .Name {
   font-size: 1.2em;
   font-weight: bold;
@@ -69,19 +78,67 @@
 
 .Types {
   display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.TypeContainer {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 8px; /* Espaciado entre elementos */
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0.1rem 0.5rem;
+}
+.TypeContainer h4 {
+  margin-right: 5px;
+  color: white;
+}
+.TypeText p {
+  margin-bottom: 0;
+}
+
+.TypeText h4 {
+  margin-top: 0;
+}
+/* 
+.Name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.TypesContainer {
+  display: flex;
+  align-items: space-between;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 1.25em;
+  padding: 0.25em;
+  position: relative;
+  top: -100px;
+}
+
+.Types {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0.5em;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  margin: 0 0.25em;
 }
 
 .Types span {
   font-size: 1em;
   padding: 2px 5px;
-}
-
-.Types svg {
-  /* Asegúrate de que el ícono esté a la misma altura que el texto */
-  vertical-align: middle;
-}
+} */
 
 .bug {
   background-color: rgb(157 193 48);
@@ -103,7 +160,7 @@
   background-color: rgb(239 151 230);
 }
 
-.fight {
+.fighting {
   background-color: rgb(217 66 86);
 }
 
@@ -136,7 +193,7 @@
 }
 
 .poison {
-  background-color: rgb(181 99 206);
+  background-color: rgb(125, 69, 199);
 }
 
 .psychic {

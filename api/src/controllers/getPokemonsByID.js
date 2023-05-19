@@ -39,7 +39,30 @@ const getPokemonById = async (req, res, next) => {
         });
 
         if (pokemonDB) {
-          return res.json(pokemonDB);
+          const {
+            id,
+            name,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
+            types,
+          } = pokemonDB;
+          return res.json({
+            id,
+            name,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
+            types: types.map((type) => type.name),
+          });
         } else {
           return res.status(404).json({ message: "Pokemon not found" });
         }

@@ -9,13 +9,15 @@ import {
   orderByAToZZToA,
 } from "../../redux/actions/actions";
 import Sort from "../../assets/Sort";
+import styles from "./FilterAndOrder.module.css";
 
 function FilterAndOrder() {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
-  const pokemons = useSelector((state) => state.pokemons);
+  // const pokemons = useSelector((state) => state.pokemons);
   const [openFilter, setOpenFilter] = useState({ display: "none" });
   const [openOrder, setOpenOrder] = useState({ display: "none" });
+  const error = useSelector((state) => state.error);
 
   function handlerOpenFilter() {
     openFilter.display === "flex" //aca estoy preguntando si openFilter es true, si es true lo pongo en false, si es false lo pongo en true, flex me sirve para que se muestre el div.
@@ -55,6 +57,7 @@ function FilterAndOrder() {
               </option>
             ))}
           </select>
+
           <select
             onChange={(event) => {
               return dispatch(filterPokemonsByOrigin(event.target.value));
@@ -95,6 +98,7 @@ function FilterAndOrder() {
             Best attack "flecha para arriba"
           </button>
         </div>
+        {error && <div className={styles.error}>{error}</div>}
       </div>
     </div>
   );

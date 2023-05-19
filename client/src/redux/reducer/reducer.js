@@ -12,6 +12,7 @@ import {
   ORDER_BY_ATTACK,
   SET_POKEMONS,
   SET_POKEMONS_DETAIL,
+  CLEAR_POKEMONS,
 } from "../actions/actions";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   currentPage: 0,
   pokemon: [],
   pokemonDetail: [],
+  error: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -46,7 +48,7 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_POKEMONS_BY_TYPE:
       const filteredPokemons = state.pokemons.filter((pokemon) => {
         // Con esta constante filteredPokemons guardo el resultado de filtrar los pokemons por tipo y luego lo paso al state
-        return pokemon.types?.includes(action.payload);
+        return pokemon.Types?.includes(action.payload);
       });
 
       if (action.payload !== "Types") {
@@ -56,14 +58,23 @@ const rootReducer = (state = initialState, action) => {
             filterAndOrderPokemons: [...state.pokemons],
             filter: [...state.pokemons],
             currentPage: 0,
+            error: null,
           };
         } else {
-          return {
-            ...state,
-            filterAndOrderPokemons: filteredPokemons,
-            filter: filteredPokemons,
-            currentPage: 0,
-          };
+          if (filteredPokemons.length === 0) {
+            return {
+              ...state,
+              error: "Type not found", // establece el error
+            };
+          } else {
+            return {
+              ...state,
+              filterAndOrderPokemons: filteredPokemons,
+              filter: filteredPokemons,
+              currentPage: 0,
+              error: null,
+            };
+          }
         }
       }
       break;
@@ -95,62 +106,7 @@ const rootReducer = (state = initialState, action) => {
         }
       }
       break;
-    /* case FILTER_POKEMONS_BY_ORIGIN:
-      if (action.payload !== "Origin") {
-        if (action.payload === "All Origins") {
-          return {
-            ...state,
-            filterAndOrderPokemons: [state.pokemons],
-            currentPage: 0,
-          };
-        }
-        if (action.payload === "API") {
-          return {
-            ...state,
-            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
-              return pokemon.id < 1200; // Cambiado de pokemon.id.length < 1200
-            }),
-            currentPage: 0,
-          };
-        } else {
-          return {
-            ...state,
-            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
-              return pokemon.id >= 1200; // Cambiado de pokemon.id.length >= 1200
-            }),
-            currentPage: 0,
-          };
-        }
-      }
-      break; */
-    /*  case FILTER_POKEMONS_BY_ORIGIN:
-      if (action.payload !== "Origin") {
-        if (action.payload === "All Origins") {
-          return {
-            ...state,
-            filterAndOrderPokemons: [state.pokemons],
-            currentPage: 0,
-          };
-        }
-        if (action.payload === "API") {
-          return {
-            ...state,
-            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
-              return pokemon.id.length < 1200;
-            }),
-            currentPage: 0,
-          };
-        } else {
-          return {
-            ...state,
-            filterAndOrderPokemons: state.pokemons.filter((pokemon) => {
-              return pokemon.id.length >= 1200;
-            }),
-            currentPage: 0,
-          };
-        }
-      }
-      break; */
+
     case ORDER_ASCENDENT_DESCENDENT:
       if (action.payload === "Ascendent") {
         return {
@@ -242,6 +198,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonDetail: action.payload,
+      };
+    case CLEAR_POKEMONS:
+      return {
+        ...state,
+        pokemon: [],
+        pokemonDetail: [],
       };
 
     default:

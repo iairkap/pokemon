@@ -2,12 +2,19 @@ const axios = require("axios");
 const { API_URL } = process.env;
 const { Pokemon, Type } = require("../db");
 
+function setNamePokemonForClient(name) {
+  const lowercase = name.toLowerCase();
+  const eliminateHyphes = lowercase.trim().split("-").join(" ");
+
+  return eliminateHyphes;
+}
+
 const findPokemonForName = async (req, res) => {
   const queryName = req.query.name;
 
   try {
     const pokemon = await axios.get(
-      `${API_URL}/pokemon/${queryName.toLowerCase()}`
+      `https://pokeapi.co/api/v2/pokemon/${queryName.toLowerCase()}`
     );
     const { id, name, sprites, types } = pokemon.data;
 
@@ -23,24 +30,25 @@ const findPokemonForName = async (req, res) => {
     try {
       const pokemon = await Pokemon.findOne({
         where: { name: queryName.toLowerCase() },
-        include: {
-          model: Type,
-          attributes: ["name"],
-          through: {
-            attributes: [],
+        include: [
+          {
+            model: Type,
+            attributes: ["name"],
+            through: { attributes: [] },
           },
-        },
+        ],
       });
 
       if (pokemon) {
-        const { id, Types, image } = pokemon;
+        const { id, types, image } = pokemon;
         const nameBD = pokemon.name;
+        console.log(pokemon);
 
         res.json({
           id,
           image,
           name: setNamePokemonForClient(nameBD),
-          Types: Types.map((type) => type.name),
+          Types: types.map((type) => type.name),
         });
       } else {
         res.status(404).json({ message: "Pokemon not found" });

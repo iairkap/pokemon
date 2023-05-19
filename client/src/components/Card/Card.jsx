@@ -90,7 +90,6 @@ function Card({ id, image, name, types }) {
   };
 
   const cardStyle = types?.length ? getCardStyle(types[0]) : "";
-
   return (
     <div className={`${styles.card} ${cardStyle}`}>
       <Link to={`/detail/${id}`} onClick={() => dispatch(setPokemons())}>
@@ -101,20 +100,51 @@ function Card({ id, image, name, types }) {
         <div className={styles.Types}>
           {types?.length > 0 &&
             types.map((type, index) => (
-              <React.Fragment key={index}>
-                <span>{type}</span>
+              <div key={index} className={styles.TypeContainer}>
+                <div className={styles.TypeText}>
+                  <p>Type:</p>
+                  <h4>{type}</h4>
+                </div>
                 {typeIcons[type] && (
-                  <img
-                    src={typeIcons[type]}
-                    alt={type}
-                    width="30"
-                    height="30"
-                  />
+                  <div className={styles.TypeIcon}>
+                    {" "}
+                    <img
+                      src={typeIcons[type]}
+                      alt={type}
+                      width="30"
+                      height="30"
+                    />
+                  </div>
                 )}
-              </React.Fragment>
+              </div>
             ))}
         </div>
       </div>
+
+      {/*  <div className={styles.card_info}>
+        <div className={styles.NameContainer}>
+          <h3 className={styles.Name}>{name}</h3>
+        </div>
+        <div className={styles.TypesContainer}>
+          <div className={styles.Types}>
+            {types?.length > 0 &&
+              types.map((type, index) => (
+                <React.Fragment key={index}>
+                  <p>Type:</p>
+                  <h3>{type}</h3>
+                  {typeIcons[type] && (
+                    <img
+                      src={typeIcons[type]}
+                      alt={type}
+                      width="30"
+                      height="30"
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 }

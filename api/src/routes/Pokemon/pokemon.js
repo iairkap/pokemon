@@ -8,8 +8,8 @@ const Pokemon = Router();
 
 Pokemon.get("/", getPokemons);
 Pokemon.get("/types", getTypes);
-Pokemon.get("/:id", getPokemonById);
 Pokemon.get("/name", findPokemonForName);
+Pokemon.get("/:id", getPokemonById);
 Pokemon.post("/", postPokemon);
 
 module.exports = Pokemon;

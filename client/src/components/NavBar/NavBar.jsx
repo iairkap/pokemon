@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 import Pokemonlogo from "../../assets/PokemonLogo.jsx";
 import styles from "./NavBar.module.css";
 
-const NavBar = () => {
+const NavBar = ({ handleBotonMenu }) => {
   return (
     <div className="NavBar">
-      <div className="NavBar__container">
+      <div className={styles.NavBarContainer}>
         <Link to="/home">
-          <Pokemonlogo />
+          <Pokemonlogo className={styles.logo} />
         </Link>
+        <div class={styles.Menu} onClick={handleBotonMenu}>
+          <div class={styles.Menu__line}></div>
+          <div class={styles.Menu__line}></div>
+          <div class={styles.Menu__line}></div>
+        </div>
       </div>
     </div>
   );
