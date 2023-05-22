@@ -121,14 +121,14 @@ function Card({ id, image, name, types }) {
                     />
                   </div>
                 )}
+                {id > 1200 && (
+                  <button onClick={handleDelete} className={styles.deleteBtn}>
+                    x
+                  </button>
+                )}
               </div>
             ))}
         </div>
-        {id > 1200 && (
-          <button onClick={handleDelete} className={styles.deleteBtn}>
-            Delete
-          </button>
-        )}
       </div>
     </div>
   );

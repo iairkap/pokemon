@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 250px;
-  height: 176px;
+  height: 133px;
   border: 1px solid #ccc;
   border-radius: 10px;
   margin: 2em;
@@ -104,6 +104,13 @@
 
 .TypeText h4 {
   margin-top: 0;
+}
+
+.deleteBtn {
+  background-color: transparent;
+  margin: none;
+  padding: 0px;
+  font-size: 0.6em;
 }
 /* 
 .Name {
