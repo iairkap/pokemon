@@ -112,6 +112,9 @@ export const deletePokemonById = (id) => {
       );
       if (response.status === 200) {
         dispatch({ type: DELETE_POKEMON_BY_ID, payload: id });
+
+        // Dispatch action to mark that a Pokemon has been deleted
+        dispatch({ type: "POKEMON_DELETED", payload: true });
       } else {
         alert("No se puede eliminar el Pokémon.");
       }
@@ -149,7 +152,7 @@ export const orderByAttack = (filter) => {
 };
 
 export const setPokemons = (pokemons) => {
-  return { type: SET_POKEMONS, payload: pokemons };
+  return { type: SET_POKEMONS, payload: {} };
 };
 
 export const setPokemonsDetail = () => {

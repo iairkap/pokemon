@@ -239,6 +239,16 @@ const rootReducer = (state = initialState, action) => {
           (pokemon) => pokemon.id !== action.payload
         ),
       };
+    case "POKEMON_DELETED":
+      return {
+        ...state,
+        pokemonDeleted: action.payload,
+      };
+    case "RESET_POKEMON_DELETED":
+      return {
+        ...state,
+        pokemonDeleted: action.payload,
+      };
 
     default:
       return { ...state };

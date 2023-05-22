@@ -53,11 +53,8 @@ const Home = () => {
       <div className={styles.Page__container}>
         <FilterAndOrder />
         {pokemons.length === 0 && <Loading />}
-        {noResults ? (
-          <p>No se encontraron resultados para los filtros seleccionados.</p>
-        ) : (
-          <CardsContainer pokemons={page} />
-        )}
+
+        <CardsContainer pokemons={page} />
       </div>
       <Pagination />
     </div>
