@@ -23,8 +23,11 @@ import fairyIcon from "../../assets/Icons-Types/fairy.png";
 import darkIcon from "../../assets/Icons-Types/dark.png";
 import poisonIcon from "../../assets/Icons-Types/poison.png";
 import flyingIcon from "../../assets/Icons-Types/flying.png";
+import { useHistory } from "react-router-dom";
 
 function Detail() {
+  const history = useHistory();
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const pokemonDetail = useSelector((state) => state.pokemonDetail[0]);
@@ -37,6 +40,9 @@ function Detail() {
       dispatch(setPokemonsDetail([]));
     };
   }, []);
+  const handleBackClick = () => {
+    history.push("/home");
+  };
 
   function getBackgroundStyle(type) {
     switch (type) {
@@ -111,9 +117,11 @@ function Detail() {
         className={styles.BackButtonContainer}
         onClick={() => dispatch(setPokemonsDetail())}
       >
-        <Link to="/home">
-          <button className={styles.BackButton}>Back</button>
-        </Link>
+        <button className={styles.BackButton} onClick={handleBackClick}>
+          Volver
+        </button>
+        {/*           <button className={styles.BackButton}>Back</button>
+         */}{" "}
       </div>
       {!pokemonDetail && (
         <div className={styles.LoadingContainer}>

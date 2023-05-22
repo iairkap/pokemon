@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPokemons } from "../../redux/actions/actions";
 import styles from "./Card.module.css";
+import { deletePokemonById } from "../../redux/actions/actions";
 
 import electricIcon from "../../assets/Icons-Types/electric.png";
 import psychicIcon from "../../assets/Icons-Types/psychic.png";
@@ -89,6 +90,10 @@ function Card({ id, image, name, types }) {
     flying: flyingIcon,
   };
 
+  const handleDelete = () => {
+    dispatch(deletePokemonById(id));
+  };
+
   const cardStyle = types?.length ? getCardStyle(types[0]) : "";
   return (
     <div className={`${styles.card} ${cardStyle}`}>
@@ -119,34 +124,13 @@ function Card({ id, image, name, types }) {
               </div>
             ))}
         </div>
+        {id > 1200 && (
+          <button onClick={handleDelete} className={styles.deleteBtn}>
+            Delete
+          </button>
+        )}
       </div>
-
-      {/*  <div className={styles.card_info}>
-        <div className={styles.NameContainer}>
-          <h3 className={styles.Name}>{name}</h3>
-        </div>
-        <div className={styles.TypesContainer}>
-          <div className={styles.Types}>
-            {types?.length > 0 &&
-              types.map((type, index) => (
-                <React.Fragment key={index}>
-                  <p>Type:</p>
-                  <h3>{type}</h3>
-                  {typeIcons[type] && (
-                    <img
-                      src={typeIcons[type]}
-                      alt={type}
-                      width="30"
-                      height="30"
-                    />
-                  )}
-                </React.Fragment>
-              ))}
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }
-
 export default Card;

@@ -42,7 +42,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 200px;
+  width: 250px;
+  height: 176px;
   border: 1px solid #ccc;
   border-radius: 10px;
   margin: 2em;
@@ -56,8 +57,8 @@
 }
 
 .imagen {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   margin-top: -5rem; /* Aquí agregamos el margen negativo. Ajusta este valor para que se ajuste a tus necesidades */
 }
@@ -69,6 +70,7 @@
   justify-content: center;
   width: 100%;
   padding: 5px 0;
+  margin-top: 1rem;
 }
 .Name {
   font-size: 1.2em;

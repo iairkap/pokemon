@@ -7,20 +7,23 @@ import {
   orderByAttack,
   filterPokemonsByOrigin,
   orderByAToZZToA,
+  filterPokemons,
 } from "../../redux/actions/actions";
 import Sort from "../../assets/Sort";
 import styles from "./FilterAndOrder.module.css";
-
+import Order from "../../assets/Icons-Types/Order";
 function FilterAndOrder() {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
-  // const pokemons = useSelector((state) => state.pokemons);
+  const [selectedType, setSelectedType] = useState("All Types");
+  const [selectedOrigin, setSelectedOrigin] = useState("All Origins");
+
   const [openFilter, setOpenFilter] = useState({ display: "none" });
   const [openOrder, setOpenOrder] = useState({ display: "none" });
   const error = useSelector((state) => state.error);
 
   function handlerOpenFilter() {
-    openFilter.display === "flex" //aca estoy preguntando si openFilter es true, si es true lo pongo en false, si es false lo pongo en true, flex me sirve para que se muestre el div.
+    openFilter.display === "flex"
       ? setOpenFilter({ display: "none" })
       : setOpenFilter({ display: "flex" });
     openOrder && setOpenOrder({ display: "none" });
@@ -30,26 +33,31 @@ function FilterAndOrder() {
     openOrder.display === "flex"
       ? setOpenOrder({ display: "none" })
       : setOpenOrder({ display: "flex" });
-    openFilter && setOpenFilter({ display: "none" }); //aca estoy preguntando si openFilter es true, si es true lo pongo en false, si es false lo pongo en true
+    openFilter && setOpenFilter({ display: "none" });
   }
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+    dispatch(filterPokemons(event.target.value, selectedOrigin));
+  };
+
+  const handleOriginChange = (event) => {
+    setSelectedOrigin(event.target.value);
+    dispatch(filterPokemons(selectedType, event.target.value));
+  };
 
   return (
-    <div className="FilterAndOrder">
-      <div className="Filter">
+    <div className={styles.Container}>
+      <div className={styles.Filter}>
         <div onClick={handlerOpenFilter}>
-          <Sort />
+          <Sort className={styles.SVG} />
         </div>
-        <div className="FilterOptions" style={openFilter}>
-          <div onClick={handlerOpenFilter}>
-            <span>x</span>
+        <div className={styles.filterMenu} style={openFilter}>
+          <div className={styles.closeContainer}>
+            <div onClick={handlerOpenFilter}>
+              <span className={styles.close}>x</span>
+            </div>
           </div>
-          <select
-            onChange={(event) => {
-              console.log("Selected type:", event.target.value);
-              return dispatch(filterPokemonsByType(event.target.value));
-            }}
-          >
-            <option value="Types">Types</option>
+          <select className={styles.selectMenu} onChange={handleTypeChange}>
             <option value="All Types">All Types</option>
             {types.map((type) => (
               <option value={type.name} key={type.id}>
@@ -57,48 +65,69 @@ function FilterAndOrder() {
               </option>
             ))}
           </select>
-
-          <select
-            onChange={(event) => {
-              return dispatch(filterPokemonsByOrigin(event.target.value));
-            }}
-          >
-            <option value="All Origins">Alls origins</option>
-            <option value="API">Api</option>{" "}
-            {/* Cambiado de <option value="Api">Api</option> */}
-            <option value="Data base">Data base</option>{" "}
-            {/* Cambiado de <option value="Db">Data base</option> */}
+          <select className={styles.selectMenu} onChange={handleOriginChange}>
+            <option value="All Origins">All Origins</option>
+            <option value="API">API</option>
+            <option value="Database">Database</option>
           </select>
         </div>
       </div>
       <div className="Order">
-        <div onClick={handlerOpenOrder}>
-          <span>botton reemplazar</span>
-        </div>
-        <div className="OrderOptions" style={openOrder}>
+        <div className={styles.Order}>
           <div onClick={handlerOpenOrder}>
-            <span>x</span>
+            <Order className={styles.SVG} />
           </div>
-          <button
-            onClick={() => dispatch(orderByAscendentDescendent("Ascendent"))}
-          >
-            Ascendent
-          </button>
-          <button
-            onClick={() => dispatch(orderByAscendentDescendent("Descendent"))}
-          >
-            Descendent
-          </button>
-          <button onClick={() => dispatch(orderByAToZZToA("A-Z"))}>A-Z</button>
-          <button onClick={() => dispatch(orderByAToZZToA("Z-A"))}>Z-A</button>
-          <button onClick={() => dispatch(orderByAttack("Worse attack"))}>
-            Worse attack "flecha para abajo"
-          </button>
-          <button onClick={() => dispatch(orderByAttack("Best attack"))}>
-            Best attack "flecha para arriba"
-          </button>
+          <div className={styles.sortMenu} style={openOrder}>
+            <div className={styles.openOrder}>
+              <div onClick={handlerOpenOrder}>
+                <span className={styles.closeOrder}>x</span>
+              </div>
+              <div className={styles.orderContainer}>
+                <button
+                  className={styles.buttonOrder}
+                  onClick={() =>
+                    dispatch(orderByAscendentDescendent("Ascendent"))
+                  }
+                >
+                  Ascendent
+                </button>
+                <button
+                  className={styles.buttonOrder}
+                  onClick={() =>
+                    dispatch(orderByAscendentDescendent("Descendent"))
+                  }
+                >
+                  Descendent
+                </button>
+                <button
+                  className={styles.buttonOrder}
+                  onClick={() => dispatch(orderByAToZZToA("A-Z"))}
+                >
+                  A-Z
+                </button>
+                <button
+                  className={styles.buttonOrder}
+                  onClick={() => dispatch(orderByAToZZToA("Z-A"))}
+                >
+                  Z-A
+                </button>
+                <button
+                  className={styles.buttonOrder}
+                  onClick={() => dispatch(orderByAttack("Worse attack"))}
+                >
+                  Peor Ataque{" "}
+                </button>
+                <button
+                  className={styles.buttonOrder}
+                  onClick={() => dispatch(orderByAttack("Best attack"))}
+                >
+                  Mejor Ataque{" "}
+                </button>
+              </div>
+            </div>
+          </div>
+          {error && <div className={styles.error}>{error}</div>}
         </div>
-        {error && <div className={styles.error}>{error}</div>}
       </div>
     </div>
   );

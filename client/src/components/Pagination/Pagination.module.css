@@ -8,11 +8,15 @@
 .Page__container {
   width: 100%;
   max-width: 1200px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .PageNavigator {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin-top: 20px;
 }
@@ -24,7 +28,7 @@
 
 .Previous,
 .Next {
-  background-color: #f3f3f3;
+  background-color: rgb(48 109 180);
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -34,4 +38,23 @@
 .Previous:hover,
 .Next:hover {
   background-color: #ddd;
+}
+
+button {
+  margin: 120px;
+  background-color: #edbc06;
+  color: white;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: 0.3s;
 }

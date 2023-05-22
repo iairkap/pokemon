@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { usePage } from "../../usePage";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
@@ -18,9 +18,10 @@ const Home = () => {
   const currentPage = useSelector((state) => state.currentPage);
   const numberOfPokemonsPerPage = 12;
   const [openMenu, setOpenMenu] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
   function handleBotonMenu() {
-    openMenu ? setOpenMenu(false) : setOpenMenu(true);
+    setOpenMenu(!openMenu);
   }
 
   const { page, countPage } = usePage(
@@ -28,6 +29,14 @@ const Home = () => {
     numberOfPokemonsPerPage,
     currentPage
   );
+
+  useEffect(() => {
+    if (pokemons.length === 0) {
+      setNoResults(true);
+    } else {
+      setNoResults(false);
+    }
+  }, [pokemons]);
 
   console.log(pokemons);
   return (
@@ -38,14 +47,17 @@ const Home = () => {
           openMenu={openMenu}
           setOpenMenu={setOpenMenu}
         />
-        {openMenu && <Menu handleBotonMenu={handleBotonMenu} />}
+        <Menu handleBotonMenu={handleBotonMenu} openMenu={openMenu} />
       </div>
+      <SearchBar className={styles.searchbar} />
       <div className={styles.Page__container}>
-        <SearchBar />
-
         <FilterAndOrder />
         {pokemons.length === 0 && <Loading />}
-        <CardsContainer pokemons={page} />
+        {noResults ? (
+          <p>No se encontraron resultados para los filtros seleccionados.</p>
+        ) : (
+          <CardsContainer pokemons={page} />
+        )}
       </div>
       <Pagination />
     </div>

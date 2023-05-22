@@ -1,0 +1,65 @@
+.Menu {
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(248, 165, 79, 0.5);
+  backdrop-filter: blur(15px);
+  top: 0;
+  right: 0;
+  position: fixed;
+  width: 100vw;
+  z-index: 2;
+  box-shadow: 0 8px 6px -10px rgba(0, 0, 0, 0.567); /* Añade un sombreado abajo */
+}
+
+.Menu_container {
+  padding: 30px 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.Menu_container div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  list-style: none;
+  margin: 60px 0 130px 0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 2.4rem;
+}
+
+.Menu ul li a {
+  color: #fff; /* Color de los enlaces, ajusta como sea necesario */
+  text-decoration: none;
+}
+
+.Menu ul li a:visited {
+  color: #fff; /* Mantiene el color de los enlaces blancos incluso después de haber sido visitados */
+}
+
+.Menu_open {
+  transform: translateY(0);
+  transition: transform 0.3s ease-out;
+}
+
+.Menu_close {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in;
+}
+
+.x {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 2.4rem;
+  color: #fff;
+  padding-top: 2em;
+}

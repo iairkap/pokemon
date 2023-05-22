@@ -1,3 +1,9 @@
+.Container {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
 .error {
   color: #721c24;
   background-color: #f8d7da;
@@ -6,4 +12,136 @@
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+}
+
+.Filter {
+  position: relative;
+}
+
+.Button {
+  margin: 120px;
+  background-color: #edbc06;
+  color: white;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.SVG {
+  fill: #edbc06;
+}
+
+.filterMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 191px;
+  display: flex;
+  grid-gap: 10px;
+  gap: 10px;
+  flex-direction: column;
+  background-color: rgba(248, 165, 79, 0.5);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  border-radius: 10px;
+  box-shadow: 0 8px 6px -10px rgba(0, 0, 0, 0.567);
+  animation: slideIn 0.5s forwards; /* Nueva animación */
+}
+
+.Order {
+  position: relative;
+}
+.sortMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 191px;
+  display: flex;
+  grid-gap: 10px;
+  gap: 10px;
+  flex-direction: column;
+  background-color: rgba(248, 165, 79, 0.5);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  border-radius: 10px;
+  box-shadow: 0 8px 6px -10px rgba(0, 0, 0, 0.567);
+  animation: slideIn 0.5s forwards; /* Nueva animación */
+}
+
+/* Nueva animación slideIn */
+@keyframes slideIn {
+  0% {
+    top: -1000%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.buttonOrder {
+  background-color: rgb(48 109 180);
+  margin: 20px 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+select {
+  background-color: rgb(48 109 180);
+  margin: 20px 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.close {
+  position: absolute;
+  left: 10px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1.8em;
+  color: #fff;
+  cursor: pointer;
+}
+.closeOrder {
+  position: absolute;
+  right: 10px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1.8em;
+  color: #fff;
+  cursor: pointer;
+}
+
+.closeContainer {
+  margin-bottom: 20px;
+}
+
+.orderContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }

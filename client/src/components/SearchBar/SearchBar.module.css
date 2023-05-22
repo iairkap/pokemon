@@ -1,10 +1,31 @@
 .SearchBarContainer {
-  background-color: red;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
+.SearchBar {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.SearchBarInput {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+  transition: width 0.3s ease-in-out;
+  font-size: 16px;
+}
+
+.SearchBarInput:focus {
+  outline: none;
+  width: 500px;
+}
 .SearchResult {
   display: flex;
   flex-direction: column;
@@ -21,4 +42,25 @@
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
   gap: 50px;
+}
+.SearchBarButton {
+  background-color: #edbc06;
+  color: #000000;
+  font-family: "Arial", sans-serif;
+  border-radius: 0;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.SearchBarButton:hover {
+  background-color: #c1a005;
+}
+.SearchBarButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -14,7 +14,8 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const SET_POKEMONS = "SET_POKEMONS";
 export const SET_POKEMONS_DETAIL = "SET_POKEMONS_DETAIL";
 export const CLEAR_POKEMONS = "CLEAR_POKEMONS";
-
+export const DELETE_POKEMON_BY_ID = "DELETE_POKEMON_BY_ID";
+export const FILTER_POKEMONS = "FILTER_POKEMONS";
 export const URL = "http://localhost:3001/pokemon";
 //! Funciones async
 export const getPokemons = () => {
@@ -103,6 +104,23 @@ export const getType = () => {
     }
   };
 };
+export const deletePokemonById = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/pokemon/${id}`
+      );
+      if (response.status === 200) {
+        dispatch({ type: DELETE_POKEMON_BY_ID, payload: id });
+      } else {
+        alert("No se puede eliminar el Pokémon.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("No se puede eliminar el Pokémon.");
+    }
+  };
+};
 
 //! funciones sync
 
@@ -134,10 +152,14 @@ export const setPokemons = (pokemons) => {
   return { type: SET_POKEMONS, payload: pokemons };
 };
 
-export const setPokemonsDetail = (pokemons) => {
-  return { type: SET_POKEMONS_DETAIL, payload: pokemons };
+export const setPokemonsDetail = () => {
+  return { type: SET_POKEMONS_DETAIL, payload: {} };
 };
 
 export const clearPokemons = () => {
   return { type: CLEAR_POKEMONS };
+};
+
+export const filterPokemons = (type, origin) => {
+  return { type: FILTER_POKEMONS, payload: { type, origin } };
 };

@@ -13,6 +13,8 @@ import {
   SET_POKEMONS,
   SET_POKEMONS_DETAIL,
   CLEAR_POKEMONS,
+  DELETE_POKEMON_BY_ID,
+  FILTER_POKEMONS,
 } from "../actions/actions";
 
 const initialState = {
@@ -45,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         types: action.payload,
       };
-    case FILTER_POKEMONS_BY_TYPE:
+    /*  case FILTER_POKEMONS_BY_TYPE:
       const filteredPokemons = state.pokemons.filter((pokemon) => {
         // Con esta constante filteredPokemons guardo el resultado de filtrar los pokemons por tipo y luego lo paso al state
         return pokemon.Types?.includes(action.payload);
@@ -77,7 +79,32 @@ const rootReducer = (state = initialState, action) => {
           }
         }
       }
-      break;
+      break; */
+    case FILTER_POKEMONS:
+      const { type, origin } = action.payload;
+
+      let filteredByType = [...state.pokemons];
+      let filteredByOrigin = [...state.pokemons];
+
+      if (type !== "All Types") {
+        filteredByType = state.pokemons.filter((pokemon) =>
+          pokemon.Types?.includes(type)
+        );
+      }
+      if (origin !== "All Origins") {
+        filteredByOrigin = state.pokemons.filter((pokemon) => {
+          return origin === "API" ? pokemon.id < 1200 : pokemon.id >= 1200;
+        });
+      }
+      const filteredPokemons = filteredByType.filter((pokemon) =>
+        filteredByOrigin.includes(pokemon)
+      );
+
+      return {
+        ...state,
+        filterAndOrderPokemons: filteredPokemons,
+        currentPage: 0,
+      };
     case FILTER_POKEMONS_BY_ORIGIN:
       if (action.payload !== "Origin") {
         if (action.payload === "All Origins") {
@@ -204,6 +231,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemon: [],
         pokemonDetail: [],
+      };
+    case DELETE_POKEMON_BY_ID:
+      return {
+        ...state,
+        pokemons: state.pokemons.filter(
+          (pokemon) => pokemon.id !== action.payload
+        ),
       };
 
     default:

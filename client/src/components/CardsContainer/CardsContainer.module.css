@@ -7,5 +7,22 @@
   height: 100%;
   box-sizing: border-box;
   margin: 0;
-  padding: 0 150px;
+  padding: 0 89px;
+}
+
+select {
+  background-color: red;
+  margin: 10px;
+  color: #fff;
+  border: none;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
 }

@@ -20,14 +20,14 @@ h3 {
   margin-top: -16px;
   padding-top: 0px;
 }
-@keyframes backgroundAnimation {
+/* @keyframes backgroundAnimation {
   0% {
     transform: translateY(-100%);
   }
   100% {
     transform: translateY(0);
   }
-}
+} */
 .PokemonTypes {
   display: flex;
   align-items: space-between;
@@ -69,8 +69,8 @@ h3 {
 }
 
 .PokemonDetailContainer {
-  animation: backgroundAnimation 2s ease-out forwards;
-
+  /*   animation: backgroundAnimation 2s ease-out forwards;
+ */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -121,7 +121,7 @@ h3 {
   width: 20px;
   height: 20px;
 }
-
+/* 
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -129,7 +129,7 @@ h3 {
   100% {
     opacity: 1;
   }
-}
+} */
 .PokemonDetailInfo {
   display: flex;
   flex-direction: column;

@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 124px 0 150px;
+  padding: 0 150px 0 150px;
 }
 .Menu {
   padding: 0 15px;
@@ -17,7 +17,6 @@
   justify-content: center;
   gap: 5px;
   z-index: 1;
-  background-color: white;
   width: 30px; /* Ajusta el ancho según sea necesario */
   height: 30px; /* Ajusta la altura según sea necesario */
 }
@@ -28,4 +27,8 @@
   background-color: #edbc06;
   transition: transform 0.3s ease-in-out;
   border-radius: 2px;
+}
+
+.searchbar {
+  margin-left: -7em;
 }

@@ -16,6 +16,7 @@ function SearchBar() {
   const [openResult, setOpenResult] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   function setNamePokemonForDB(name) {
     const lowerCaseName = name.toLowerCase();
@@ -59,13 +60,24 @@ function SearchBar() {
       handleSearch();
     }
   }
+  function handleInputFocus() {
+    setIsExpanded(true);
+  }
+
+  function handleInputBlur() {
+    setIsExpanded(false);
+  }
 
   return (
     <div className={styles.SearchBarContainer}>
       <div className={styles.SearchBar}>
         <input
-          className={styles.SearchBarInput}
+          className={`${styles.SearchBarInput} ${
+            isExpanded ? styles.SearchBarInputExpanded : ""
+          }`}
           onChange={handleInput}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           type="search"
           placeholder="Search Pokemon"
           value={search}

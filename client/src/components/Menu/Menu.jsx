@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Menu.module.css";
 
-function Menu({ handleBotonMenu }) {
+function Menu({ handleBotonMenu, openMenu }) {
+  const menuClass = openMenu ? styles.Menu_open : styles.Menu_close;
   return (
-    <div className="Menu">
+    <div className={`${styles.Menu} ${menuClass}`}>
       <div className={styles.Menu_container}>
-        <div onClick={handleBotonMenu}>x</div>
+        <div className={styles.x} onClick={handleBotonMenu}>
+          x
+        </div>
         <ul>
           <li>
             <Link to="/home">Home</Link>
