@@ -4,7 +4,6 @@ const deletePokemonById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    // Comprueba si el ID es mayor que 1200 (para evitar la eliminación de los Pokemon de la API)
     if (id <= 1200) {
       return res.status(400).json({ message: "Cannot delete API Pokemon" });
     }
