@@ -8,6 +8,7 @@ import {
 import styles from "./SearchBar.module.css";
 import Loading from "../../assets/loading";
 import Card from "../Card/Card";
+import { WhoIsThatPokemon } from "../../assets/WhoIsThatPokemon";
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -102,7 +103,9 @@ function SearchBar() {
               <span>{pokemon[0].message}</span>
             </div>
           )}
-          {pokemon[0]?.name &&
+          {pokemon[0]?.message === "Not found" ? (
+            <WhoIsThatPokemon />
+          ) : (
             pokemon.map(({ id, image, name, Types }) => {
               return (
                 <Card
@@ -113,7 +116,8 @@ function SearchBar() {
                   types={Types}
                 />
               );
-            })}
+            })
+          )}
         </div>
       )}
     </div>

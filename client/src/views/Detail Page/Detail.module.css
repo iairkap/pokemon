@@ -234,3 +234,8 @@ h3 {
   background-color: rgb(85 158 223);
   height: 100vh;
 }
+
+.shadow {
+  background-color: rgb(45, 53, 59);
+  height: 100vh;
+}

@@ -59,14 +59,20 @@ function CreatePokemon() {
   }
 
   function handleChange(e) {
+    let value = e.target.value;
+
+    if (e.target.name === "name") {
+      value = value.toLowerCase();
+    }
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     });
     setErrors(
       validate({
         ...form,
-        [e.target.name]: e.target.value,
+        [e.target.name]: value,
       })
     );
   }
@@ -101,17 +107,16 @@ function CreatePokemon() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (Object.values(errors).length > 0) {
+    const errorValues = Object.values(errors);
+    const formErrors = errorValues.filter((error) => error !== "");
+    if (formErrors.length > 0) {
       alert("No se pudo crear el pokemon");
     } else {
-      console.log("Form types:", form.types);
-      console.log("All types:", types);
+      const finalForm = { ...form };
+      dispatch(createPokemon(finalForm));
+      setCreated(finalForm);
+      alert("Pokemon creado con éxito");
     }
-
-    const finalForm = { ...form };
-    dispatch(createPokemon(finalForm));
-    setCreated(finalForm);
-    alert("Pokemon creado con éxito");
   }
 
   function validate(input) {
@@ -125,48 +130,60 @@ function CreatePokemon() {
 
     if (!input.hp) {
       errors.hp = "Vida es requerida";
-    } else if (isNaN(Number(input.hp))) {
-      errors.hp = "Vida debe ser un número";
-    } else if (Number(input.hp) >= 100) {
-      errors.hp = "Vida debe ser menor a 100";
+    } else if (isNaN(Number(input.hp)) || !Number.isInteger(Number(input.hp))) {
+      errors.hp = "Vida debe ser un número entero";
+    } else if (Number(input.hp) >= 256) {
+      errors.hp = "Vida debe ser menor a 255";
     }
 
     if (!input.attack) {
       errors.attack = "Ataque es requerido";
-    } else if (isNaN(Number(input.attack))) {
-      errors.attack = "Ataque debe ser un número";
-    } else if (Number(input.attack) >= 100) {
-      errors.attack = "Ataque debe ser menor a 100";
+    } else if (
+      isNaN(Number(input.attack)) ||
+      !Number.isInteger(Number(input.attack))
+    ) {
+      errors.attack = "Ataque debe ser un número entero";
+    } else if (Number(input.attack) >= 211) {
+      errors.attack = "Ataque debe ser menor a 210";
     }
 
     if (!input.defense) {
       errors.defense = "Defensa es requerida";
-    } else if (isNaN(Number(input.defense))) {
-      errors.defense = "Defensa debe ser un número";
-    } else if (Number(input.defense) >= 100) {
-      errors.defense = "Defensa debe ser menor a 100";
+    } else if (
+      isNaN(Number(input.defense)) ||
+      !Number.isInteger(Number(input.defense))
+    ) {
+      errors.defense = "Defensa debe ser un número entero";
+    } else if (Number(input.defense) >= 251) {
+      errors.defense = "Defensa debe ser menor a 250";
     }
 
     if (!input.speed) {
       errors.speed = "Velocidad es requerida";
-    } else if (isNaN(Number(input.speed))) {
-      errors.speed = "Velocidad debe ser un número";
-    } else if (Number(input.speed) >= 100) {
-      errors.speed = "Velocidad debe ser menor a 100";
+    } else if (
+      isNaN(Number(input.speed)) ||
+      !Number.isInteger(Number(input.speed))
+    ) {
+      errors.speed = "Velocidad debe ser un número entero";
+    } else if (Number(input.speed) >= 201) {
+      errors.speed = "Velocidad debe ser menor a 200";
     }
 
     if (!input.height) {
       errors.height = "Altura es requerida";
     } else if (isNaN(Number(input.height))) {
       errors.height = "Altura debe ser un número";
-    } else if (Number(input.height) >= 30) {
-      errors.height = "Altura debe ser menor a 30";
+    } else if (Number(input.height) > 21) {
+      errors.height = "Altura debe ser menor a 20";
     }
 
     if (!input.weight) {
       errors.weight = "Peso es requerido";
-    } else if (isNaN(Number(input.weight))) {
-      errors.weight = "Peso debe ser un número";
+    } else if (
+      isNaN(Number(input.weight)) ||
+      !Number.isInteger(Number(input.weight))
+    ) {
+      errors.weight = "Peso debe ser un número entero";
     } else if (Number(input.weight) >= 1000) {
       errors.weight = "Peso debe ser menor a 1000";
     }
@@ -180,6 +197,7 @@ function CreatePokemon() {
     if (input.types.length === 0) {
       errors.types = "Al menos un tipo es requerido";
     }
+
     return errors;
   }
   console.log("Current form.types state:", form.types);
@@ -273,7 +291,7 @@ function CreatePokemon() {
           />
           <p className={styles.errorText}>{errors.speed}</p>
 
-          <label className={styles.label}>Altura:</label>
+          <label className={styles.label}>Altura: en metros</label>
           <input
             name="height"
             value={form.height}

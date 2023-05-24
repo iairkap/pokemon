@@ -41,7 +41,7 @@ const getPokemons = async (req, res, next) => {
       };
     });
 
-    const pokemons = await axios.get(`${API_BASE_URL}?limit=60&offset=0`);
+    const pokemons = await axios.get(`${API_BASE_URL}?limit=60&offset=300`);
 
     const results = pokemons.data.results.map((pokemon) =>
       axios.get(pokemon.url)

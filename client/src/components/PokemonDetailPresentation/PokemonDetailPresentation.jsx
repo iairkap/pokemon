@@ -45,6 +45,9 @@ function PokemonDetailPresentation({ pokemonDetail, handleBackClick }) {
         return styles["steel"];
       case "fairy":
         return styles["fairy"];
+      case "shadow":
+        return styles["shadow"];
+
       default:
         return "";
     }

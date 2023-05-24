@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 250px;
-  height: 133px;
+  height: 180px;
   border: 1px solid #ccc;
   border-radius: 10px;
   margin: 2em;
@@ -57,10 +57,10 @@
 }
 
 .imagen {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
-  margin-top: -5rem; /* Aquí agregamos el margen negativo. Ajusta este valor para que se ajuste a tus necesidades */
+  margin-top: -5rem;
 }
 
 .card_info {
@@ -218,5 +218,13 @@
 }
 
 .water {
-  background-color: rgb(85 158 223);
+  background-color: #559edf;
+}
+
+.shadow {
+  background-color: rgb(45, 53, 59);
+}
+
+.unknown {
+  background-color: #dadc8e;
 }

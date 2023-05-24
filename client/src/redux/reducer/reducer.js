@@ -15,6 +15,7 @@ import {
   CLEAR_POKEMONS,
   DELETE_POKEMON_BY_ID,
   FILTER_POKEMONS,
+  CLEAR_ERROR,
 } from "../actions/actions";
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
   pokemon: [],
   pokemonDetail: [],
   error: null,
+  lastOrderSelected: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -90,21 +92,61 @@ const rootReducer = (state = initialState, action) => {
         filteredByType = state.pokemons.filter((pokemon) =>
           pokemon.Types?.includes(type)
         );
+        if (filteredByType.length === 0) {
+          return {
+            ...state,
+            error: `No Pokemon found with type ${type}`,
+          };
+        }
       }
+
       if (origin !== "All Origins") {
         filteredByOrigin = state.pokemons.filter((pokemon) => {
           return origin === "API" ? pokemon.id < 1200 : pokemon.id >= 1200;
         });
       }
+
       const filteredPokemons = filteredByType.filter((pokemon) =>
         filteredByOrigin.includes(pokemon)
       );
+      if (filteredPokemons.length === 0) {
+        return {
+          ...state,
+          error: `No Pokemon found with type ${type} and origin ${origin}`,
+        };
+      }
+
+      if (state.lastOrderSelected) {
+        switch (state.lastOrderSelected) {
+          case "Ascendent":
+            filteredPokemons.sort((a, b) => b.id - a.id);
+            break;
+          case "Descendent":
+            filteredPokemons.sort((a, b) => a.id - b.id);
+            break;
+          case "A-Z":
+            filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case "Z-A":
+            filteredPokemons.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+          case "Worse attack":
+            filteredPokemons.sort((a, b) => a.attack - b.attack);
+            break;
+          case "Best attack":
+            filteredPokemons.sort((a, b) => b.attack - a.attack);
+            break;
+          default:
+            break;
+        }
+      }
 
       return {
         ...state,
         filterAndOrderPokemons: filteredPokemons,
         currentPage: 0,
       };
+
     case FILTER_POKEMONS_BY_ORIGIN:
       if (action.payload !== "Origin") {
         if (action.payload === "All Origins") {
@@ -142,6 +184,7 @@ const rootReducer = (state = initialState, action) => {
             ...state.filterAndOrderPokemons.sort((a, b) => b.id - a.id), //b.id - a.id es para que me ordene de forma descendente
           ],
           currentPage: 0,
+          lastOrderSelected: action.payload,
         };
       } else {
         return {
@@ -150,6 +193,7 @@ const rootReducer = (state = initialState, action) => {
             ...state.filterAndOrderPokemons.sort((a, b) => a.id - b.id), //a.id - b.id es para que me ordene de forma ascendente
           ],
           currentPage: 0,
+          lastOrderSelected: action.payload, // Add this line
         };
       }
     case ORDER_A_TO_Z_Z_TO_A:
@@ -168,6 +212,7 @@ const rootReducer = (state = initialState, action) => {
             }),
           ],
           currentPage: 0,
+          lastOrderSelected: action.payload, // Add this line
         };
       }
       if (action.payload === "Z-A") {
@@ -185,6 +230,7 @@ const rootReducer = (state = initialState, action) => {
             }),
           ],
           currentPage: 0,
+          lastOrderSelected: action.payload, // Add this line
         };
       }
       break;
@@ -195,6 +241,7 @@ const rootReducer = (state = initialState, action) => {
           filterAndOrderPokemons: [
             ...state.filterAndOrderPokemons.sort((a, b) => a.attack - b.attack),
           ],
+          lastOrderSelected: action.payload, // Add this line
         };
       }
       if (action.payload === "Best attack") {
@@ -203,6 +250,7 @@ const rootReducer = (state = initialState, action) => {
           filterAndOrderPokemons: [
             ...state.filterAndOrderPokemons.sort((a, b) => b.attack - a.attack),
           ],
+          lastOrderSelected: action.payload, // Add this line
         };
       }
       break;
@@ -248,6 +296,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonDeleted: action.payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

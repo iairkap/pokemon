@@ -17,6 +17,8 @@ export const CLEAR_POKEMONS = "CLEAR_POKEMONS";
 export const DELETE_POKEMON_BY_ID = "DELETE_POKEMON_BY_ID";
 export const FILTER_POKEMONS = "FILTER_POKEMONS";
 export const URL = "http://localhost:3001/pokemon";
+export const CLEAR_ERROR = "CLEAR_ERROR";
+
 //! Funciones async
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -165,4 +167,8 @@ export const clearPokemons = () => {
 
 export const filterPokemons = (type, origin) => {
   return { type: FILTER_POKEMONS, payload: { type, origin } };
+};
+
+export const clearError = () => {
+  return { type: CLEAR_ERROR };
 };

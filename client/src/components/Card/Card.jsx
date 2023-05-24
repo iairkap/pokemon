@@ -65,6 +65,10 @@ function Card({ id, image, name, types }) {
         return styles["steel"];
       case "fairy":
         return styles["fairy"];
+      case "shadow":
+        return styles["shadow"];
+      case "unknown":
+        return styles["unknown"];
       default:
         return "";
     }
@@ -121,7 +125,7 @@ function Card({ id, image, name, types }) {
                     />
                   </div>
                 )}
-                {id > 1200 && (
+                {id >= 1200 && (
                   <button onClick={handleDelete} className={styles.deleteBtn}>
                     x
                   </button>
