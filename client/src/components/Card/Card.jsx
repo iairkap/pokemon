@@ -111,7 +111,7 @@ function Card({ id, image, name, types }) {
             types.map((type, index) => (
               <div key={index} className={styles.TypeContainer}>
                 <div className={styles.TypeText}>
-                  <p>Type:</p>
+                  <p className={styles.typi}>Type:</p>
                   <h4>{type}</h4>
                 </div>
                 {typeIcons[type] && (

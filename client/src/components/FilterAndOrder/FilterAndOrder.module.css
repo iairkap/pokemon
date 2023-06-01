@@ -5,13 +5,19 @@
   justify-content: space-between;
 }
 .error {
-  color: #721c24;
-  background-color: #f8d7da;
+  display: flex;
+  justify-content: center;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+
+  color: white;
+  background-color: rgb(48 109 180);
   border-color: #f5c6cb;
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  box-shadow: inset;
 }
 
 .Filter {
@@ -80,7 +86,6 @@
   animation: slideIn 0.5s forwards; /* Nueva animación */
 }
 
-/* Nueva animación slideIn */
 @keyframes slideIn {
   0% {
     top: -1000%;

@@ -1,9 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Menu.module.css";
+import { useDispatch } from "react-redux";
+import { resetState } from "../../redux/actions/actions";
+import { useHistory } from "react-router-dom";
 
 function Menu({ handleBotonMenu, openMenu }) {
   const menuClass = openMenu ? styles.Menu_open : styles.Menu_close;
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleExit = () => {
+    dispatch(resetState());
+    history.push("/");
+  };
   return (
     <div className={`${styles.Menu} ${menuClass}`}>
       <div className={styles.Menu_container}>
@@ -18,7 +28,9 @@ function Menu({ handleBotonMenu, openMenu }) {
             <Link to="/create">Create</Link>
           </li>
           <li>
-            <Link to="/">Exit</Link>
+            <Link to="/" onClick={handleExit}>
+              Exit
+            </Link>
           </li>
         </ul>
       </div>

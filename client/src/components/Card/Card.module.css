@@ -112,6 +112,14 @@
   padding: 0px;
   font-size: 0.6em;
 }
+
+.typi {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
 /* 
 .Name {
   font-size: 1.2em;

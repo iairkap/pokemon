@@ -217,7 +217,7 @@ function CreatePokemon() {
       <div className={styles.form}>
         <div>
           <div>
-            <label>Tipos:</label>
+            <label className={styles.tiposName}>Tipos: </label>
           </div>
         </div>
         <div className={styles.types}>

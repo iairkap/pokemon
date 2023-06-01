@@ -5,6 +5,7 @@ const { getPokemonById } = require("../../controllers/getPokemonsByID");
 const { findPokemonForName } = require("../../controllers/getPokemonByName");
 const { postPokemon } = require("../../controllers/postPokemon");
 const { deletePokemonById } = require("../../controllers/deletePokemonById");
+const { postType } = require("../../controllers/postType");
 const Pokemon = Router();
 
 Pokemon.get("/", getPokemons);
@@ -13,5 +14,6 @@ Pokemon.get("/name", findPokemonForName);
 Pokemon.get("/:id", getPokemonById);
 Pokemon.post("/", postPokemon);
 Pokemon.delete("/:id", deletePokemonById);
+Pokemon.post("/types", postType);
 
 module.exports = Pokemon;

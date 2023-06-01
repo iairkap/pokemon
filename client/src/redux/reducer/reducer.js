@@ -16,6 +16,7 @@ import {
   DELETE_POKEMON_BY_ID,
   FILTER_POKEMONS,
   CLEAR_ERROR,
+  RESET_STATE,
 } from "../actions/actions";
 
 const initialState = {
@@ -302,6 +303,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         error: null,
       };
+    case RESET_STATE:
+      return initialState;
 
     default:
       return { ...state };

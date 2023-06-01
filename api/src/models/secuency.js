@@ -19,3 +19,6 @@ async function createSequence(sequelize) {
 }
 
 module.exports = createSequence;
+
+
+//
